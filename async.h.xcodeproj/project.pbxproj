@@ -14,6 +14,7 @@
 		4B0373002A18356D00CBB0A6 /* example-codelock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B0372B32A1830CF00CBB0A6 /* example-codelock.c */; };
 		4B0373012A18356D00CBB0A6 /* example-small.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B0372B12A1830CF00CBB0A6 /* example-small.c */; };
 		4B0373022A18356D00CBB0A6 /* async.h in Sources */ = {isa = PBXBuildFile; fileRef = 4B0372AB2A18308700CBB0A6 /* async.h */; };
+		4BDF9A172B0796C80017CE2B /* example_state.h in Sources */ = {isa = PBXBuildFile; fileRef = 4BDF9A162B0796C80017CE2B /* example_state.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		4B0372BE2A18315000CBB0A6 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0372DB2A18333100CBB0A6 /* examples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = examples.h; path = async/examples.h; sourceTree = "<group>"; };
 		4B0372DC2A18334600CBB0A6 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = async/main.c; sourceTree = "<group>"; };
+		4BDBB86D2A184220000FD3C8 /* main.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = main.entitlements; sourceTree = "<group>"; };
+		4BDF9A162B0796C80017CE2B /* example_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = example_state.h; path = async/example_state.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,8 @@
 		4B0372962A182CDD00CBB0A6 = {
 			isa = PBXGroup;
 			children = (
+				4BDF9A162B0796C80017CE2B /* example_state.h */,
+				4BDBB86D2A184220000FD3C8 /* main.entitlements */,
 				4B0372DC2A18334600CBB0A6 /* main.c */,
 				4B0372DB2A18333100CBB0A6 /* examples.h */,
 				4B0372B82A1830E800CBB0A6 /* async-sem.h */,
@@ -137,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B0372FD2A18356D00CBB0A6 /* examples.h in Sources */,
+				4BDF9A172B0796C80017CE2B /* example_state.h in Sources */,
 				4B0372FE2A18356D00CBB0A6 /* async-sem.h in Sources */,
 				4B0372FF2A18356D00CBB0A6 /* example-buffer.c in Sources */,
 				4B0373002A18356D00CBB0A6 /* example-codelock.c in Sources */,
@@ -263,10 +269,12 @@
 		4B0372C32A18315000CBB0A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = main.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "async/example-small.c async/example-codelock.c async/main.c async/async.h async/examples.h async/example-buffer.c";
-				DEVELOPMENT_TEAM = QP9MSC9X74;
+				DEVELOPMENT_TEAM = M684FYCYG6;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.bitcoincore.async.h;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -274,10 +282,12 @@
 		4B0372C42A18315000CBB0A6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = main.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "async/example-small.c async/example-codelock.c async/main.c async/async.h async/examples.h async/example-buffer.c";
-				DEVELOPMENT_TEAM = QP9MSC9X74;
+				DEVELOPMENT_TEAM = M684FYCYG6;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.bitcoincore.async.h;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
