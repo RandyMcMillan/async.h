@@ -5,12 +5,44 @@
  */
 
 /* We must always include async.h in our asyncs code. */
+#include "example_state.h"
 #include "async.h"
 
-#include <stdio.h> /* For printf(). */
+//#include <stdio.h> /* For printf(). */
 
 /* Two flags that the two async functions use. */
+
 static int async1_flag, async2_flag;
+
+async nested_example(state *pt) {
+
+    async_begin(pt);
+    printf("async_begin(pt);\n");
+
+    // fork two nested async subroutines and wait until both complete
+
+    async_init(&pt->nested1);
+    printf("async_init(&pt->nested1);\n");
+    async_init(&pt->nested2);
+    printf("async_init(&pt->nested2);\n");
+    //await(async_call(nested, &pt->nested1) & async_call(nested, &pt->nested2));
+
+    // OR call directly:
+    //await(nested(&pt->nested1) & nested(&pt->nested2));
+
+    // fork two nested async subroutines and wait until at least one completes
+
+    async_init(&pt->nested1);
+    printf("async_init(&pt->nested1);\n");
+    async_init(&pt->nested2);
+    printf("async_init(&pt->nested2);\n");
+    await(async_call(nested, &pt->nested1) | async_call(nested, &pt->nested2));
+
+    // OR call the subroutines directly:
+    //await(nested(&pt->nested1) | nested(&pt->nested2));
+
+    async_end;
+}
 
 /**
  * The first async function. A async function must always
@@ -23,26 +55,40 @@ static int async1_flag, async2_flag;
 static async
 async1(struct async *pt)
 {
-	/* A async function must begin with async_begin() which takes a
-	   pointer to a struct async. */
+	/*
+     A async function must begin with async_begin()
+     which takes a pointer to a struct async.
+     */
+
 	async_begin(pt);
 
-	/* We loop forever here. */
+	/*
+     We loop forever here.
+     */
 	while (1) {
-		/* Wait until the other async has set its flag. */
+		/*
+         Wait until the other async has set its flag.
+         */
 		await(async2_flag != 0);
 		printf("async 1 running\n");
 
-		/* We then reset the other async's flag, and set our own
-		   flag so that the other async can run. */
+		/*
+         We then reset the other async's flag,
+         and set our own flag
+         so that the other async can run.
+         */
 		async2_flag = 0;
 		async1_flag = 1;
 
 		/* And we loop. */
 	}
 
-	/* All async functions must end with async_end which takes a
-	   pointer to a struct pt. */
+	/*
+     All async functions must end
+     with async_end
+     which takes a pointer
+     to a struct pt.
+     */
 	async_end;
 }
 
@@ -78,12 +124,15 @@ async2(struct async *pt)
  * the two asyncs.
  */
 static struct async pt1, pt2;
+state pt3; //from example_state.h
+
 void
 example_small(int i)
 {
 	/* Initialize the async state variables with async_init(). */
 	async_init(&pt1);
-	async_init(&pt2);
+    async_init(&pt2);
+    // note async_init(&pt3);
 
 	/*
 	 * Then we schedule the two asyncs by repeatedly calling their
@@ -92,6 +141,7 @@ example_small(int i)
 	 */
 	while (--i >= 0) {
 		async1(&pt1);
+        nested_example(&pt3);
 		async2(&pt2);
 	}
 }
