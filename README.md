@@ -29,6 +29,7 @@ Function|Description
 
 I ported the examples found in the protothreads distribution to async.h. Here
 is the async.h equivalent of the protothreads sample on the home page:
+
 ```C
 #include "async.h"
 
@@ -48,12 +49,14 @@ async example(struct async *pt) {
     async_end;
 }
 ```
+
 Most of the code looks very similar, with the main exceptions being the
 more concise names, and the fact that the async.h calls mostly don't need
 to accept the async structure/local continuation as an argument.
 
 Here is the same example as above, but where the timer is lifted to
 a local parameter:
+
 ```C
 #include "async.h"
 
@@ -76,6 +79,7 @@ async example(example_state *pt) {
     async_end;
 }
 ```
+
 So local parameters simply need to be lifted to members of the async
 state structure.
 
@@ -83,6 +87,7 @@ state structure.
 
 You can also execute nested async subroutines in a manner reminiscent of
 fork-join parallelism:
+
 ```C
 #include "async.h"
 
