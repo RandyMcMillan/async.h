@@ -5,7 +5,10 @@
  */
 
 /* We must always include async.h in our asyncs code. */
+#ifndef __EXAMPLESTATE_H__
 #include "example_state.h"
+#endif
+
 #include "async.h"
 
 //#include <stdio.h> /* For printf(). */
@@ -17,14 +20,15 @@ static int async1_flag, async2_flag;
 async nested_example(state *pt) {
 
     async_begin(pt);
-    printf("async_begin(pt);\n");
+
+    //printf("nested_example:async_begin(pt);\n");
 
     // fork two nested async subroutines and wait until both complete
 
     async_init(&pt->nested1);
-    printf("async_init(&pt->nested1);\n");
+    //printf("nested_example:async_init(&pt->nested1);\n");
     async_init(&pt->nested2);
-    printf("async_init(&pt->nested2);\n");
+    //printf("nested_example:async_init(&pt->nested2);\n");
     //await(async_call(nested, &pt->nested1) & async_call(nested, &pt->nested2));
 
     // OR call directly:
@@ -33,9 +37,9 @@ async nested_example(state *pt) {
     // fork two nested async subroutines and wait until at least one completes
 
     async_init(&pt->nested1);
-    printf("async_init(&pt->nested1);\n");
+    //printf("nested_example:async_init(&pt->nested1);\n");
     async_init(&pt->nested2);
-    printf("async_init(&pt->nested2);\n");
+    //printf("nested_example:async_init(&pt->nested2);\n");
     await(async_call(nested, &pt->nested1) | async_call(nested, &pt->nested2));
 
     // OR call the subroutines directly:
@@ -70,8 +74,7 @@ async1(struct async *pt)
          Wait until the other async has set its flag.
          */
 		await(async2_flag != 0);
-		printf("async 1 running\n");
-
+		//printf("async1: running\n");
 		/*
          We then reset the other async's flag,
          and set our own flag
@@ -107,8 +110,7 @@ async2(struct async *pt)
 
 		/* Wait until the other async has set its flag. */
 		await(async1_flag != 0);
-		printf("async 2 running\n");
-
+		//printf("async2: running\n");
 		/* We then reset the other async's flag. */
 		async1_flag = 0;
 
@@ -130,10 +132,8 @@ void
 example_small(int i)
 {
 	/* Initialize the async state variables with async_init(). */
-	async_init(&pt1);
+    async_init(&pt1);
     async_init(&pt2);
-    // note async_init(&pt3);
-
 	/*
 	 * Then we schedule the two asyncs by repeatedly calling their
 	 * async functions and passing a pointer to the async
