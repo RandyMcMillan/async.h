@@ -1,10 +1,15 @@
-//#ifndef __EXAMPLESTATE_H__
-//#define __EXAMPLESTATE_H__
+#ifndef __EXAMPLESTATE_H__
+#define __EXAMPLESTATE_H__
 
 #include "async.h"
 
+#ifndef _STDIO_H
 #include <stdio.h>
+#endif
+
+#ifndef _TIME_H
 #include <time.h>
+#endif
 
 typedef struct {
     async_state;
@@ -48,4 +53,4 @@ async nested(struct async *pt3){
 }
 state pt3;
 
-//#endif
+#endif
