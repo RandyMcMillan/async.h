@@ -58,9 +58,14 @@
 #include <unistd.h>
 #include <sys/time.h>
 #endif
-#include <stdio.h>
 
+#ifndef _STDIO_H
+#include <stdio.h>
+#endif
+
+#ifndef ASYNC_H
 #include "async.h"
+#endif
 
 /*---------------------------------------------------------------------------*/
 /*
