@@ -9,7 +9,9 @@
 #ifndef ASYNC_SEM_H
 #define ASYNC_SEM_H
 
+#ifndef ASYNC_H
 #include "async.h"
+#endif
 
 struct async_sem {
   unsigned int count;
