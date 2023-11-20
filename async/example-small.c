@@ -9,9 +9,13 @@
 #include "example_state.h"
 #endif
 
+#ifndef ASYNC_H
 #include "async.h"
+#endif
 
-//#include <stdio.h> /* For printf(). */
+#ifndef _STDIO_H
+#include <stdio.h> /* For printf(). */
+#endif
 
 /* Two flags that the two async functions use. */
 
