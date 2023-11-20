@@ -8,7 +8,7 @@ OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC))
 all : $(OBJ)
 	$(CC) $^ -o $(BUILD_DIR)/example
 
-$(BUILD_DIR)/%.o : %.c async.h
+$(BUILD_DIR)/%.o : %.c async.h example_state.h
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CCFlags) -c -o $@ $<
 
