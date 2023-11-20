@@ -38,7 +38,14 @@
 #else
 #include <unistd.h>
 #endif
+
+#ifndef _STDIO_H
 #include <stdio.h>
+#endif
+
+#ifndef ASYNC_H
+#include "async.h"
+#endif
 
 #include "async-sem.h"
 
